@@ -15,7 +15,11 @@ public class ModClass implements IMod {
 	}
 
 	public void postLoadSession(PostLoadSessionEvent event) {
-		((Session) event.getSession()).getStats().increaseDp(999999999);
-		((Session) event.getSession()).getStats().setDpPerMinute(999999);
+		int dp = 999999999;
+
+		if (((Session) event.getSession()).getStats().getDpCount() < dp) {
+			((Session) event.getSession()).getStats().increaseDp(dp);
+			((Session) event.getSession()).getStats().setDpPerMinute(999999);
+		}
 	}
 }
